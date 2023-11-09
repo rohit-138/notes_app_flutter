@@ -7,7 +7,6 @@ import 'package:notes_app/todo.dart';
 void main() {
   runApp(const MyApp());
 }
-
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -56,6 +55,7 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: AppBar(),
         body: _buildPage(_currentIndex), // Content of the selected tab
         bottomNavigationBar: Container(
           decoration: BoxDecoration(
@@ -90,7 +90,7 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
 
               unselectedItemColor: Colors.grey,
               selectedItemColor: Colors
-                  .purpleAccent, // Customize the color of the selected item here
+                  .deepPurpleAccent, // Customize the color of the selected item here
               backgroundColor:
                   Colors.white, // Background color of the navigation bar
             ),
