@@ -1,5 +1,6 @@
-create navigation which has four screens
-create each screens
-fetch notes from api
+create navigation which has four screens  -> checked
+create home screens             -> checked
+fetch notes from api            
 create post note  page
 add functionality for changing font style and height
+submit
