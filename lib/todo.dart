@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:notes_app/Custom/CustomAlignbutton.dart';
 import 'package:notes_app/Custom/CustomRadioButton.dart';
+import 'package:notes_app/Custom/fontOption.dart';
 import 'package:notes_app/controller/TextController.dart';
 import 'package:notes_app/utils/utility.dart';
 
@@ -71,7 +73,43 @@ class _MyCustomWidgetState extends State<MyCustomWidget> {
                           TextStyle(fontWeight: FontWeight.w400, fontSize: 25),
                     ),
                     (currentTextField == 1
-                        ? Obx(() => Container(
+                        ? Obx(() {
+                            var elevatedButton = ElevatedButton(
+                                onPressed: () {
+                                  controller.setTextStyle(
+                                      fontStyle: FontStyle.italic);
+                                },
+                                style: ButtonStyle(
+                                    padding: MaterialStateProperty.all<
+                                        EdgeInsetsGeometry>(
+                                      const EdgeInsets.symmetric(
+                                          horizontal:
+                                              8.0), // Adjust horizontal padding
+                                    ),
+                                    minimumSize:
+                                        MaterialStateProperty.all<Size>(
+                                      const Size(50.0,
+                                          36.0), // Adjust width and height
+                                    ),
+                                    shape: MaterialStateProperty.all<
+                                        OutlinedBorder>(
+                                      RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(
+                                            8.0), // Adjust border radius
+                                      ),
+                                    ),
+                                    backgroundColor:
+                                        MaterialStateProperty.all<Color>(
+                                      Colors.grey
+                                          .shade100, // Set your desired background color
+                                    )),
+                                child: const Text(
+                                  "Italic",
+                                  style: TextStyle(
+                                    fontStyle: FontStyle.italic,
+                                  ),
+                                ));
+                            return Container(
                               child: Column(
                                 children: [
                                   Row(
@@ -164,78 +202,83 @@ class _MyCustomWidgetState extends State<MyCustomWidget> {
                                       )
                                     ],
                                   ),
-                                  Row(
+                                  Wrap(
+                                    spacing: 5,
+                                    runSpacing: 5,
                                     children: [
-                                      ElevatedButton(
-                                          onPressed: () {
-                                            controller.setTextStyle(
-                                                fontStyle: FontStyle.italic);
+                                      FontOptionChip(
+                                          value: FontOption.regular,
+                                          groupValue: controller.getFontOption,
+                                          onChanged: (value) {
+                                            controller.setFontOption(
+                                                FontOption.regular);
                                           },
-                                          style: ElevatedButton.styleFrom(
-                                            backgroundColor: Colors.grey[50],
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(8.0),
-                                            ),
-                                          ),
-                                          child: const Text(
-                                            "Italic",
-                                            style: TextStyle(
-                                                fontStyle: FontStyle.italic),
-                                          )),
-                                      const SizedBox(
-                                        width: 20,
+                                          fontWeight: FontWeight.normal,
+                                          fontStyle: FontStyle.normal),
+                                      FontOptionChip(
+                                          value: FontOption.italic,
+                                          groupValue: controller.getFontOption,
+                                          onChanged: (value) {
+                                            controller.setFontOption(
+                                                FontOption.italic);
+                                          },
+                                          fontWeight: FontWeight.normal,
+                                          fontStyle: FontStyle.italic),
+                                      FontOptionChip(
+                                          value: FontOption.bold,
+                                          groupValue: controller.getFontOption,
+                                          onChanged: (value) {
+                                            controller
+                                                .setFontOption(FontOption.bold);
+                                          },
+                                          fontWeight: FontWeight.bold,
+                                          fontStyle: FontStyle.normal),
+
+                                      // const SizedBox(
+                                      //   width: 10,
+                                      // ),
+
+                                      CustomAlignButton(
+                                        value: TextAlign.left,
+                                        groupValue:
+                                            controller.getTitleAlignment,
+                                        controller: controller,
+                                        icondata: Icon(Icons.format_align_left),
                                       ),
-                                      ElevatedButton(
-                                          onPressed: () {
-                                            controller.setTextStyle(
-                                                // fontStyle: FontStyle.normal,
-                                                fontWeight: FontWeight.normal);
-                                          },
-                                          style: ElevatedButton.styleFrom(
-                                            backgroundColor: Colors.grey[50],
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(8.0),
-                                            ),
-                                          ),
-                                          child: const Text(
-                                            "Regular",
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.normal,
-                                                fontStyle: FontStyle.normal),
-                                          )),
-                                      const SizedBox(
-                                        width: 20,
+                                      CustomAlignButton(
+                                        value: TextAlign.center,
+                                        groupValue:
+                                            controller.getTitleAlignment,
+                                        controller: controller,
+                                        icondata:
+                                            Icon(Icons.format_align_center),
                                       ),
-                                      ElevatedButton(
-                                          onPressed: () {
-                                            controller.setTextStyle(
-                                                fontWeight: FontWeight.bold);
-                                            // controller
-                                            //     .setFontStyle(FontStyle.normal);
-                                          },
-                                          style: ElevatedButton.styleFrom(
-                                            backgroundColor: Colors.grey[50],
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(8.0),
-                                            ),
-                                          ),
-                                          child: const Text(
-                                            "bold",
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold),
-                                          ))
+                                      CustomAlignButton(
+                                        value: TextAlign.right,
+                                        groupValue:
+                                            controller.getTitleAlignment,
+                                        controller: controller,
+                                        icondata:
+                                            Icon(Icons.format_align_right),
+                                      ),
                                     ],
-                                  ),
-                                  SizedBox(
-                                    height: 20,
                                   ),
                                   Wrap(
                                     spacing: 16.0, // Space between children
                                     runSpacing: 8.0, // Space between lines
                                     children: [
+                                      CustomChipButton(
+                                          value: 'Default',
+                                          groupValue: controller
+                                              .getTextStyle.fontFamily,
+                                          fontFamily: 'Default',
+                                          onChanged: (value) {
+                                            controller.setTextStyle(
+                                                fontFamily: value,
+                                                fontSize: 20.0,
+                                                fontWeight: FontWeight.normal,
+                                                fontStyle: FontStyle.normal);
+                                          }),
                                       CustomChipButton(
                                           value: 'serif',
                                           groupValue: controller
@@ -281,23 +324,245 @@ class _MyCustomWidgetState extends State<MyCustomWidget> {
                                             controller.setTextStyle(
                                                 fontFamily: value);
                                           }),
-                                      CustomChipButton(
-                                          value: 'fantasy',
-                                          groupValue: controller
-                                              .getTextStyle.fontFamily,
-                                          fontFamily: 'fantasy',
-                                          onChanged: (value) {
-                                            controller.setTextStyle(
-                                                fontFamily: value);
-                                          }),
 
                                       //
                                     ],
                                   )
                                 ],
                               ),
-                            ))
-                        : const Text("2"))
+                            );
+                          })
+                        : Obx(() => Column(
+                              children: [
+                                Row(
+                                  children: [
+                                    CustomRadioButton(
+                                      color: Colors.black,
+                                      value: Colors.black,
+                                      groupValue: controller
+                                          .getTextDescriptionStyle.color,
+                                      onChanged: (value) {
+                                        controller.setTextDescriptionStyle(
+                                            color: Colors.black);
+                                      },
+                                    ),
+                                    CustomRadioButton(
+                                      color: Colors.white,
+                                      value: Colors.white,
+                                      groupValue: controller
+                                          .getTextDescriptionStyle.color,
+                                      onChanged: (value) {
+                                        controller.setTextDescriptionStyle(
+                                            color: Colors.white);
+                                        controller.update();
+                                      },
+                                    ),
+                                    CustomRadioButton(
+                                      color: Colors.purple,
+                                      value: Colors.purple,
+                                      groupValue: controller
+                                          .getTextDescriptionStyle.color,
+                                      onChanged: (value) {
+                                        controller.setTextDescriptionStyle(
+                                            color: Colors.purple);
+                                      },
+                                    ),
+                                    CustomRadioButton(
+                                      color: Colors.red,
+                                      value: Colors.red,
+                                      groupValue: controller
+                                          .getTextDescriptionStyle.color,
+                                      onChanged: (value) {
+                                        controller.setTextDescriptionStyle(
+                                            color: Colors.red);
+                                      },
+                                    ),
+                                    CustomRadioButton(
+                                      color: Colors.blue,
+                                      value: Colors.blue,
+                                      groupValue: controller
+                                          .getTextDescriptionStyle.color,
+                                      onChanged: (value) {
+                                        controller.setTextDescriptionStyle(
+                                            color: Colors.blue);
+                                      },
+                                    ),
+                                    CustomRadioButton(
+                                      color: Colors.yellow,
+                                      value: Colors.yellow,
+                                      groupValue: controller
+                                          .getTextDescriptionStyle.color,
+                                      onChanged: (value) {
+                                        controller.setTextDescriptionStyle(
+                                            color: Colors.yellow);
+                                        controller.update();
+                                      },
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(height: 20),
+                                Row(
+                                  children: [
+                                    SizedBox(
+                                      width: 300,
+                                      child: Slider(
+                                        value: controller
+                                                .getTextDescriptionStyle
+                                                .fontSize ??
+                                            20.0,
+                                        min: 20.0,
+                                        max: 65.0,
+                                        onChanged: (value) {
+                                          controller.setTextDescriptionStyle(
+                                              fontSize: value.ceilToDouble());
+                                        },
+                                      ),
+                                    ),
+                                    // Spacer(),
+                                    Center(
+                                      child: Text(
+                                          "${controller.getTextDescriptionStyle.fontSize?.ceil()}"),
+                                    )
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    const SizedBox(
+                                      width: 20,
+                                    ),
+                                    ElevatedButton(
+                                        onPressed: () {
+                                          controller.setTextDescriptionStyle(
+                                              fontStyle: FontStyle.normal,
+                                              fontWeight: FontWeight.normal);
+                                        },
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor: Colors.grey[50],
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                          ),
+                                        ),
+                                        child: const Text(
+                                          "Regular",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.normal,
+                                              fontStyle: FontStyle.normal),
+                                        )),
+                                    const SizedBox(
+                                      width: 20,
+                                    ),
+                                    ElevatedButton(
+                                        onPressed: () {
+                                          controller.setTextDescriptionStyle(
+                                              fontStyle: FontStyle.italic);
+                                        },
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor: Colors.grey[50],
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                          ),
+                                        ),
+                                        child: const Text(
+                                          "Italic",
+                                          style: TextStyle(
+                                              fontStyle: FontStyle.italic),
+                                        )),
+                                    const SizedBox(
+                                      width: 20,
+                                    ),
+                                    ElevatedButton(
+                                        onPressed: () {
+                                          controller.setTextDescriptionStyle(
+                                              fontWeight: FontWeight.bold);
+                                          // controller
+                                          //     .setFontStyle(FontStyle.normal);
+                                        },
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor: Colors.grey[50],
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                          ),
+                                        ),
+                                        child: const Text(
+                                          "bold",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold),
+                                        ))
+                                  ],
+                                ),
+                                const SizedBox(
+                                  height: 20,
+                                ),
+                                Wrap(
+                                  spacing: 16.0, // Space between children
+                                  runSpacing: 8.0, // Space between lines
+                                  children: [
+                                    CustomChipButton(
+                                        value: 'Default',
+                                        groupValue: controller
+                                            .getTextDescriptionStyle.fontFamily,
+                                        fontFamily: 'Default',
+                                        onChanged: (value) {
+                                          controller.setTextDescriptionStyle(
+                                              fontFamily: value,
+                                              fontSize: 20.0,
+                                              fontWeight: FontWeight.normal,
+                                              fontStyle: FontStyle.normal);
+                                        }),
+                                    CustomChipButton(
+                                        value: 'serif',
+                                        groupValue: controller
+                                            .getTextDescriptionStyle.fontFamily,
+                                        fontFamily: 'Serif',
+                                        onChanged: (value) {
+                                          controller.setTextDescriptionStyle(
+                                              fontFamily: value);
+                                        }),
+                                    CustomChipButton(
+                                        value: 'monospace',
+                                        groupValue: controller
+                                            .getTextDescriptionStyle.fontFamily,
+                                        fontFamily: 'monospace',
+                                        onChanged: (value) {
+                                          controller.setTextStyle(
+                                              fontFamily: value);
+                                        }),
+                                    CustomChipButton(
+                                        value: 'roboto',
+                                        groupValue: controller
+                                            .getTextDescriptionStyle.fontFamily,
+                                        fontFamily: 'Roboto',
+                                        onChanged: (value) {
+                                          controller.setTextDescriptionStyle(
+                                              fontFamily: value);
+                                        }),
+                                    CustomChipButton(
+                                        value: 'sans-serif',
+                                        groupValue: controller
+                                            .getTextDescriptionStyle.fontFamily,
+                                        fontFamily: 'Sans-Serif',
+                                        onChanged: (value) {
+                                          controller.setTextDescriptionStyle(
+                                              fontFamily: value);
+                                        }),
+                                    CustomChipButton(
+                                        value: 'cursive',
+                                        groupValue: controller
+                                            .getTextDescriptionStyle.fontFamily,
+                                        fontFamily: 'Cursive',
+                                        onChanged: (value) {
+                                          controller.setTextDescriptionStyle(
+                                              fontFamily: value);
+                                        }),
+
+                                    //
+                                  ],
+                                )
+                              ],
+                            )))
                   ],
                 ),
               ),
@@ -310,77 +575,84 @@ class _MyCustomWidgetState extends State<MyCustomWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            ' ${Utility.getCurrentDate()}',
-            style: const TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          const SizedBox(height: 16),
-          Obx(
-            () => TextFormField(
-              onTap: () {
-                setState(() {
-                  currentTextField = 1;
-                });
-              },
-              controller: titleController,
-              style: controller.getTextStyle,
-              decoration: const InputDecoration(
-                border: InputBorder.none,
-                hintText: 'Enter text',
-                fillColor: Colors.transparent,
-                filled: true,
-                // contentPadding: EdgeInsets.all(10.0),
+    return Container(
+      // clipBehavior: Clip.antiAlias,
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              ' ${Utility.getCurrentDate()}',
+              style: const TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
               ),
-              onChanged: (value) {
-                setState(() {
-                  title = value;
-                });
-              },
             ),
-          ),
-          const SizedBox(height: 16),
-          Obx(
-            () => TextFormField(
-              onTap: () {
-                setState(() {
-                  currentTextField = 2;
-                });
-              },
-              controller: descriptionController,
-              style: controller.getTextStyle,
-              decoration: const InputDecoration(
-                hintText: 'Enter description',
-                labelText: 'Description',
+            const SizedBox(height: 16),
+            Obx(
+              () => TextFormField(
+                onTap: () {
+                  setState(() {
+                    currentTextField = 1;
+                  });
+                },
+                controller: titleController,
+                style: controller.getTextStyle,
+                textAlign: controller.getTitleAlignment,
+                decoration: const InputDecoration(
+                  border: InputBorder.none,
+                  hintText: 'Enter Title',
+                  fillColor: Colors.transparent,
+                  filled: true,
+                  // contentPadding: EdgeInsets.all(10.0),
+                ),
+                onChanged: (value) {
+                  setState(() {
+                    title = value;
+                  });
+                },
               ),
-              onChanged: (value) {
-                setState(() {
-                  description = value;
-                });
-              },
             ),
-          ),
-          const SizedBox(height: 16),
-          const Row(
-            children: [
-              Text('Color:'),
-              SizedBox(width: 8),
-            ],
-          ),
-          const SizedBox(height: 16),
-          FloatingActionButton(
-            clipBehavior: Clip.hardEdge,
-            onPressed: _showCustomizationOptions,
-            child: const Icon(Icons.palette),
-          ),
-        ],
+            const SizedBox(height: 16),
+            Obx(
+              () => TextFormField(
+                onTap: () {
+                  setState(() {
+                    currentTextField = 2;
+                  });
+                },
+                // controller: titleController,
+                style: controller.getTextDescriptionStyle,
+                decoration: const InputDecoration(
+                  border: InputBorder.none,
+                  hintText: 'Enter Description',
+                  fillColor: Colors.transparent,
+                  filled: true,
+                  // contentPadding: EdgeInsets.all(10.0),
+                ),
+                onChanged: (value) {
+                  setState(() {
+                    description = value;
+                  });
+                },
+              ),
+            ),
+            const SizedBox(height: 16),
+            const Row(
+              children: [
+                Text('Color:'),
+                SizedBox(width: 8),
+              ],
+            ),
+            const SizedBox(height: 16),
+            FloatingActionButton(
+              clipBehavior: Clip.hardEdge,
+              onPressed: _showCustomizationOptions,
+              child: const Icon(Icons.palette),
+            ),
+          ],
+        ),
       ),
     );
   }
