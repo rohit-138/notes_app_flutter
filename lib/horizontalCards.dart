@@ -19,9 +19,6 @@ class HorizontalCardsList extends StatelessWidget {
               fontWeight: FontWeight.bold,
               fontSize: 20,
             )),
-            
-        (true)
-            ?
         SizedBox(
           height: 200,
           child: ListView.builder(
@@ -34,7 +31,7 @@ class HorizontalCardsList extends StatelessWidget {
                     updatedAt: notes[index].updatedAt);
               }),
               )
-            : const Text("loading")
+            
       ],
     );
   }
