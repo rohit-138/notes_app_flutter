@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
+import './utils/utility.dart';
 
 class NotesCard extends StatelessWidget {
   final String title;
   final String description;
-  const NotesCard({required this.title, required this.description});
+  final String? updatedAt;
+  const NotesCard(
+      {super.key, required this.title,
+      required this.description,
+      required this.updatedAt});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(4.0),
-      child: Container(
+      child: SizedBox(
         height: 200,
         width: 150,
         child: Card(
@@ -46,15 +51,7 @@ class NotesCard extends StatelessWidget {
                   ),
                 ),
               ),
-              Container(
-                height: 30, // Height of the bottom container
-                color: Colors.deepPurpleAccent,
-                child: const Center(
-                    child: Text(
-                  "20 min ago  ",
-                  style: TextStyle(color: Colors.white),
-                )),
-              ),
+              Utility.timeRemainingWidget(updatedAt)
             ],
           ),
         ),
