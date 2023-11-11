@@ -1,0 +1,29 @@
+[33mcommit cfc023079845b49abea5f83d6fd33d118884a349[m[33m ([m[1;36mHEAD -> [m[1;32mnotescreen[m[33m, [m[1;31morigin/notescreen[m[33m)[m
+Author: Rohit <khalaterohit123@gmail.com>
+Date:   Sat Nov 11 18:41:46 2023 +0530
+
+    changes
+
+[33mcommit bb6ebdc5d3dce978f36c5cbb2064b4455da974de[m[33m ([m[1;31morigin/homescreen[m[33m, [m[1;32mhomescreen[m[33m)[m
+Author: Rohit <khalaterohit123@gmail.com>
+Date:   Sat Nov 11 13:36:07 2023 +0530
+
+    modifed text field
+
+[33mcommit 1b1440810fb7d064f448143095cccbb0646e09be[m
+Author: Rohit <khalaterohit123@gmail.com>
+Date:   Thu Nov 9 22:53:48 2023 +0530
+
+    get api integration
+
+[33mcommit 814cca91dffdfc31fc805d6d4058f1fe814e595e[m
+Author: Rohit <khalaterohit123@gmail.com>
+Date:   Thu Nov 9 17:49:02 2023 +0530
+
+    completed homescreen
+
+[33mcommit 33ac271f3fe099f89a2e39f664060c6cdefa3fbf[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/bottom[m[33m, [m[1;32mmain[m[33m)[m
+Author: Rohit <khalaterohit123@gmail.com>
+Date:   Thu Nov 9 15:24:30 2023 +0530
+
+    completed bottomnavigation bar
