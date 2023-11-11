@@ -13,12 +13,19 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Notes App',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyBottomNavigationBar(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const MyBottomNavigationBar(),
+        '/home': (context) => const HomeScreen(),
+        '/todo': (context) => const ToDo(),
+        '/notes': (context) => const Notes(),
+        '/diary': (context) => const Diary(),
+      },
     );
   }
 }
@@ -56,10 +63,16 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-            backgroundColor: Colors.deepPurple,
-            leading: const Icon(
-              Icons.arrow_back,
-              color: Colors.blueAccent,
+            backgroundColor: Colors.purple.shade100,
+            leading: IconButton(
+              onPressed: () {
+                Navigator.pushReplacementNamed(context, '/');
+              },
+              icon: const Icon(
+                Icons.arrow_back,
+                color: Colors.deepPurple,
+              ),
+              
             )),
         
         body: _buildPage(_currentIndex), // Content of the selected tab

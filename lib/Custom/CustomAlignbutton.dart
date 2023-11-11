@@ -4,17 +4,17 @@ import 'package:notes_app/controller/TextController.dart';
 class CustomAlignButton extends StatelessWidget {
   final TextAlign value;
   final TextAlign? groupValue;
-  // final ValueChanged<TextAlign?>? onChanged;
+  final ValueChanged<TextAlign?>? onChanged;
   final Icon icondata;
-  TextController controller;
+  // TextController controller;
 
   CustomAlignButton({
     super.key,
     required this.value,
     required this.groupValue,
-    // required this.onChanged,
+    required this.onChanged,
     required this.icondata,
-    required this.controller,
+    // required this.controller,
   });
 
   @override
@@ -22,7 +22,9 @@ class CustomAlignButton extends StatelessWidget {
     return IconButton(
         color: groupValue == value ? Colors.deepPurple : Colors.black,
         onPressed: () {
-          controller.setTitleAlignment(value);
+          if (onChanged != null) {
+            onChanged!(value);
+          }
         },
         icon: icondata);
   }

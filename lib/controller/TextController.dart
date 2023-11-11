@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 enum FontOption { regular, bold, italic }
 class TextController extends GetxController {
   Rx<FontOption> fontOption = FontOption.regular.obs;
+  Rx<FontOption> descFontOption = FontOption.regular.obs;
   Rx<TextAlign> titleAlignment = TextAlign.left.obs;
   Rx<TextAlign> descriptionAlignment = TextAlign.left.obs;
   Rx<TextStyle> textTitleStyle = const TextStyle(
@@ -26,6 +27,7 @@ class TextController extends GetxController {
   TextAlign get getTitleAlignment => titleAlignment.value;
   TextAlign get getDescriptionAlignment => descriptionAlignment.value;
   FontOption get getFontOption => fontOption.value;
+  FontOption get getDescFontOption => descFontOption.value;
 
   void setTitleAlignment(TextAlign textAlign) {
     titleAlignment.value = textAlign;
@@ -80,6 +82,25 @@ class TextController extends GetxController {
         break;
       case FontOption.bold:
         setTextStyle(fontWeight: FontWeight.bold);
+
+        break;
+      default:
+    }
+    update();
+  }
+
+  void setDescFontOption(FontOption option) {
+    fontOption.value = option;
+    switch (option) {
+      case FontOption.regular:
+        setTextDescriptionStyle(
+            fontStyle: FontStyle.normal, fontWeight: FontWeight.normal);
+        break;
+      case FontOption.italic:
+        setTextDescriptionStyle(fontStyle: FontStyle.italic);
+        break;
+      case FontOption.bold:
+        setTextDescriptionStyle(fontWeight: FontWeight.bold);
 
         break;
       default:
