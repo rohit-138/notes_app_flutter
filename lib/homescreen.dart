@@ -1,9 +1,9 @@
 import 'dart:convert';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:notes_app/horizontalCards.dart';
 import 'package:notes_app/model/Note.dart';
-import 'package:notes_app/notescard.dart';
 import 'package:http/http.dart' as http;
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -38,8 +38,15 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(left: 8.0),
+    if (notesList.isEmpty) {
+      return const Center(
+          child: CupertinoActivityIndicator(   
+        color: Colors.deepPurpleAccent,
+        radius: 20,
+      ));
+    } else {
+return Padding(
+      padding: const EdgeInsets.only(left: 8.0),
       child: Expanded(
           child: ListView(
         children: [
@@ -58,6 +65,8 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       )),
     );
+    }
+    
   }
 }
 

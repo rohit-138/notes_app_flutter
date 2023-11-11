@@ -6,7 +6,7 @@ class NotesCard extends StatelessWidget {
   final String description;
   final String? updatedAt;
   const NotesCard(
-      {required this.title,
+      {super.key, required this.title,
       required this.description,
       required this.updatedAt});
 
@@ -14,7 +14,7 @@ class NotesCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(4.0),
-      child: Container(
+      child: SizedBox(
         height: 200,
         width: 150,
         child: Card(

@@ -29,8 +29,38 @@ class Utility {
       child: Center(
           child: Text(
         calculateTimeDifference(inputTime),
-        style: TextStyle(color: Colors.white),
+        style: const TextStyle(color: Colors.white),
       )),
     );
   }
+  static getCurrentDate() {
+    DateTime now = DateTime.now();
+    String day = now.day.toString();
+    String suffix = getDaySuffix(now.day);
+    String formattedDate = DateFormat('MMMM yyyy').format(now);
+    return '$day$suffix $formattedDate';
+  }
+
+  static getDaySuffix(int day) {
+    if (day >= 11 && day <= 13) {
+      return 'ᵗʰ';
+    }
+    switch (day % 10) {
+      case 1:
+        return 'ˢᵗ';
+      case 2:
+        return 'ⁿᵈ';
+      case 3:
+        return 'ʳᵈ';
+      default:
+        return 'ᵗʰ';
+    }
+  }
+
+
+
+
+
+
+
 }

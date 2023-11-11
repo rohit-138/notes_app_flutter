@@ -55,7 +55,13 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(),
+        appBar: AppBar(
+            backgroundColor: Colors.deepPurple,
+            leading: const Icon(
+              Icons.arrow_back,
+              color: Colors.blueAccent,
+            )),
+        
         body: _buildPage(_currentIndex), // Content of the selected tab
         bottomNavigationBar: Container(
           decoration: BoxDecoration(
