@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:notes_app/controller/TextController.dart';
 
 class CustomAlignButton extends StatelessWidget {
   final TextAlign value;
